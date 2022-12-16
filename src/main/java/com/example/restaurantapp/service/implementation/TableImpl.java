@@ -2,12 +2,10 @@ package com.example.restaurantapp.service.implementation;
 
 import com.example.restaurantapp.model.MenuItem;
 import com.example.restaurantapp.model.Table;
-import com.example.restaurantapp.model.exceptions.InvalidMenuException;
 import com.example.restaurantapp.model.exceptions.InvalidMenuItemIdException;
 import com.example.restaurantapp.model.exceptions.InvalidTableException;
 import com.example.restaurantapp.repository.MenuItemRepository;
 import com.example.restaurantapp.repository.TableRepository;
-import com.example.restaurantapp.service.MenuItemService;
 import com.example.restaurantapp.service.TableService;
 import org.springframework.stereotype.Service;
 
@@ -67,7 +65,29 @@ public class TableImpl implements TableService {
         updatedTotalSum+= menuItem.getPrice();
         table.setTotalSum(updatedTotalSum);
         this.tableRepository.save(table);
-        //Add list
+        return menuItems;
+    }
+
+    @Override
+    public List<MenuItem> deleteMenuItem(long id, String name) {
+        Table table = this.findById(id).orElseThrow(InvalidTableException:: new);
+        List<MenuItem> menuItems = table.getMenuItems();
+        Integer length=menuItems.size();
+        Integer i=0;
+        Boolean flag=true;
+        while (i<length &&flag) {
+            MenuItem menuItem1=menuItems.get(i);
+            if (menuItem1.getName().equals(name)) {
+                float updatedTotalSum=table.getTotalSum();
+                updatedTotalSum-= menuItem1.getPrice();
+                table.setTotalSum(updatedTotalSum);
+                menuItems.remove(menuItem1);
+                table.setMenuItems(menuItems);
+                flag=false;
+            }
+            i++;
+        }
+        this.tableRepository.save(table);
         return menuItems;
     }
 

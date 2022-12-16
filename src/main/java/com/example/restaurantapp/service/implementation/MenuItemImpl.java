@@ -1,7 +1,6 @@
 package com.example.restaurantapp.service.implementation;
 
 import com.example.restaurantapp.model.MenuItem;
-import com.example.restaurantapp.model.exceptions.InvalidMenuException;
 import com.example.restaurantapp.model.exceptions.InvalidMenuItemIdException;
 import com.example.restaurantapp.repository.MenuItemRepository;
 import com.example.restaurantapp.service.MenuItemService;
@@ -24,10 +23,10 @@ public class MenuItemImpl implements MenuItemService {
         return menuItemRepository.findById(id);
     }
 
-    @Override
-    public MenuItem findByName(String name) {
-        return menuItemRepository.findByName(name).orElseThrow(() -> new InvalidMenuException());
-    }
+//    @Override
+//    public MenuItem findByName(String name) {
+//        return menuItemRepository.findByName(name).orElseThrow(() -> new InvalidMenuException());
+//    }
 
     @Override
     public List<MenuItem> listAll() {

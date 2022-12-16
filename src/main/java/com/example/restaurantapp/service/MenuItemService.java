@@ -8,7 +8,6 @@ import java.util.Optional;
 public interface MenuItemService {
     Optional<MenuItem> findById(Long id);
 
-    MenuItem findByName(String name);
 
 
     List<MenuItem> listAll();

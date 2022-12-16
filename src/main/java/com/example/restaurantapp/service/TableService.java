@@ -17,6 +17,7 @@ public interface TableService {
     Table delete(Long id);
     //Add functions for adding, removing menuItems, calculating total sum!!!!
     List<MenuItem> addMenuItem(long id, String name);
+    List<MenuItem> deleteMenuItem(long id,String name);
     List<MenuItem> listAllMenuItemsForGivenTable(long id);
     Table clearTable(long id);
 }

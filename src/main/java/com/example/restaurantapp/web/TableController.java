@@ -2,7 +2,6 @@ package com.example.restaurantapp.web;
 
 import com.example.restaurantapp.model.MenuItem;
 import com.example.restaurantapp.model.Table;
-import com.example.restaurantapp.model.exceptions.InvalidTableException;
 import com.example.restaurantapp.service.TableService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +56,11 @@ public class TableController {
     @PostMapping("/add/menuItems/{id}")
     public List<MenuItem> addMenuItem(@PathVariable long id, @RequestParam String name){
         return this.tableService.addMenuItem(id,name);
+    }
+
+    @DeleteMapping("/delete/menuItems/{id}")
+    public List<MenuItem> deleteMenuItem(@PathVariable long id, @RequestParam String name){
+        return  this.tableService.deleteMenuItem(id,name);
     }
 
     @GetMapping("/clear/{id}")
